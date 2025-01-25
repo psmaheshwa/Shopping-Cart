@@ -7,14 +7,14 @@ import { v4 as uuidv4 } from 'uuid';
 const PRODUCT_FILE = 'products.json';
 
 export const addProduct = async (req: Request, res: Response) => {
-  const { sku, name, price } = req.body;
+  const { sku, name, price, id } = req.body;
   if (!validateProduct({ sku, name, price })) {
    res.status(400).send('Invalid product data');
    return;
   }
 
   const products: Product[] = await readJSON(PRODUCT_FILE);
-  let product = products.find((p: Product) => p.sku === sku);
+  let product = products.find((p: Product) => p.id === id);
   if (product) {
     product.name = name;
     product.price = price;

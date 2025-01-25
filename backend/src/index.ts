@@ -2,9 +2,17 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import productRoutes from './routes/productRoutes';
 import cartRoutes from './routes/cartRoutes';
+import cors from 'cors';
+
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors({
+  origin: 'http://localhost:4321', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'], 
+  credentials: true
+}));
 
 app.use('/products', productRoutes);
 app.use('/cart', cartRoutes);
