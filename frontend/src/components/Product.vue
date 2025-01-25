@@ -1,24 +1,27 @@
 <template>
-    <div>
+    <div class="app-container">
       <ProductForm
         :edit-product="editProduct"
         @save-product="saveProduct"
       />
-      <ProductList
-        :products="products"
-        @edit-product="editProductDetails"
-        @delete-product="deleteProduct"
-        @add-cart="addCart"
-      />
-      <CartTable
-        :cart="cartList"
-        @update-cart="updateCart"
-        @remove-cart="removeItemFromCart"/>
+      <div class="product-cart-container">
+        <ProductList
+          :products="products"
+          @edit-product="editProductDetails"
+          @delete-product="deleteProduct"
+          @add-cart="addCart"
+        />
+        <CartTable
+          :cart="cartList"
+          @update-cart="updateCart"
+          @remove-cart="removeItemFromCart"
+        />
+      </div>
     </div>
   </template>
-  
+
   <script lang="ts" setup>
-  import { ref, reactive, onMounted } from 'vue';
+  import { ref, onMounted } from 'vue';
   import ProductForm from './ProductForm.vue';
   import ProductList from './ProductList.vue';
   import CartTable from './CartTable.vue';
@@ -27,49 +30,67 @@
   const editProduct = ref(null);
   const cartList = ref([]);
   
+  const apiUrl = 'http://localhost:3000';
+  
   const fetchProducts = async () => {
-    const res = await fetch('http://localhost:3000/products');
-    products.value = await res.json();
+    try {
+      const res = await fetch(`${apiUrl}/products`);
+      products.value = await res.json();
+    } catch (error) {
+      console.error('Failed to fetch products:', error);
+    }
   };
-
+  
   const fetchCart = async () => {
-    const res = await fetch('http://localhost:3000/cart');
-    cartList.value = await res.json();
+    try {
+      const res = await fetch(`${apiUrl}/cart`);
+      cartList.value = await res.json();
+    } catch (error) {
+      console.error('Failed to fetch cart:', error);
+    }
   };
-
+  
   const addCart = async (product) => {
-    await fetch('http://localhost:3000/cart', {
+    try {
+      await fetch(`${apiUrl}/cart`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ productId: product.id, quantity: 1 }),
       });
-    const res = await fetch('http://localhost:3000/cart');
-    cartList.value = await res.json();
+      await fetchCart();
+    } catch (error) {
+      console.error('Failed to add to cart:', error);
+    }
   };
-
+  
   const updateCart = async (cart) => {
-    await fetch('http://localhost:3000/cart', {
+    try {
+      await fetch(`${apiUrl}/cart`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ productId: cart.productId, quantity: cart.quantity }),
       });
-    const res = await fetch('http://localhost:3000/cart');
-    cartList.value = await res.json();
+      await fetchCart();
+    } catch (error) {
+      console.error('Failed to update cart:', error);
+    }
   };
-
-  const removeItemFromCart = async (productId) => {
-    await fetch(`http://localhost:3000/cart/${productId}`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-    })
-    await fetchCart();
-  }
   
+  const removeItemFromCart = async (productId) => {
+    try {
+      await fetch(`${apiUrl}/cart/${productId}`, { method: 'DELETE' });
+      await fetchCart();
+    } catch (error) {
+      console.error('Failed to remove item from cart:', error);
+    }
+  };
   
   const saveProduct = async (product) => {
     try {
-      await fetch('http://localhost:3000/products', {
-        method: 'POST',
+      const method = 'POST';
+      const url = `${apiUrl}/products`;
+      await fetch(url, {
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(product),
       });
@@ -82,12 +103,12 @@
   };
   
   const editProductDetails = (product) => {
-    editProduct.value = product; // Pass product to the form
+    editProduct.value = product;
   };
   
-  const deleteProduct = async (id) => {
+  const deleteProduct = async (product) => {
     try {
-      await fetch(`http://localhost:3000/products/${id}`, { method: 'DELETE' });
+      await fetch(`${apiUrl}/products/${product.id}`, { method: 'DELETE' });
       await fetchProducts();
       await fetchCart();
     } catch (error) {
@@ -95,9 +116,39 @@
     }
   };
   
-  onMounted( async() => {
-    await fetchCart();
+  onMounted(async () => {
     await fetchProducts();
+    await fetchCart();
   });
   </script>
-  import type CartTableVue from './CartTable.vue';
+
+<style scoped>
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.product-cart-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+.product-list-container {
+  width: 48%; /* Taking up nearly half of the container */
+}
+
+.cart-table-container {
+  width: 48%; /* Taking up the other half of the container */
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+</style>

@@ -1,12 +1,11 @@
 <template>
-  <div>
+  <div class="product-form-container">
     <h2>{{ form.editing ? 'Edit Product' : 'Add Product' }}</h2>
     <form @submit.prevent="handleSubmit">
-      <input v-model="form.sku" placeholder="SKU" required />
-      <input v-model="form.name" placeholder="Name" required />
-      <input v-model.number="form.price" type="number" placeholder="Price" required />
-      <button type="submit">{{ form.editing ? 'Update' : 'Add' }}</button>
-      <button type="button" v-if="form.editing" @click="cancelEdit">Cancel</button>
+      <input v-model="form.sku" placeholder="SKU" required class="input-field" />
+      <input v-model="form.name" placeholder="Name" required class="input-field" />
+      <input v-model.number="form.price" type="number" placeholder="Price" required class="input-field" />
+      <button type="submit" class="submit-button">{{ form.editing ? 'Update' : 'Add' }}</button>
     </form>
   </div>
 </template>
@@ -60,3 +59,41 @@ const resetForm = () => {
   form.editing = false;
 };
 </script>
+<style scoped>
+.product-form-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.product-form-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+</style>
