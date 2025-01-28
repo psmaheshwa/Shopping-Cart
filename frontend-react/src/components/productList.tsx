@@ -1,11 +1,5 @@
 import React from 'react';
-
-interface Product {
-  id: string;
-  sku: string;
-  name: string;
-  price: number;
-}
+import Product from './product';
 
 interface ProductListProps {
   products: Product[];
@@ -35,13 +29,13 @@ const ProductList: React.FC<ProductListProps> = ({ products, editProduct, delete
               <td>${product.price.toFixed(2)}</td>
               <td>
                 <button onClick={() => editProduct(product)} className="button edit-button">
-                  Edit
+                <i className="fa fa-pencil"></i>
                 </button>
                 <button onClick={() => addCart(product)} className="button add-to-cart-button">
-                  Add to Cart
+                <i className="fa fa-cart-plus"></i>
                 </button>
                 <button onClick={() => deleteProduct(product)} className="button delete-button">
-                  Delete
+                <i className="fa fa-trash"></i>
                 </button>
               </td>
             </tr>

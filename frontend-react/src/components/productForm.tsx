@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  sku: string;
-}
+import { Product } from '../types/product';
 
 interface ProductFormProps {
   editProduct: Product | null;
@@ -13,19 +7,21 @@ interface ProductFormProps {
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({ editProduct, saveProduct }) => {
-  const [form, setForm] = useState<Product & { editing: boolean }>({
+  const [form, setForm] = useState<Product>({
     id: '',
     sku: '',
     name: '',
-    price: 0,
-    editing: false,
+    price: 0
   });
+  const [canEdit, setCanEdit] = useState<boolean>(false);
 
   useEffect(() => {
     if (editProduct) {
-      setForm({ ...editProduct, editing: true });
+      setForm(editProduct);
+      setCanEdit(true);
     } else {
       resetForm();
+      setCanEdit(false);
     }
   }, [editProduct]);
 
@@ -35,20 +31,19 @@ const ProductForm: React.FC<ProductFormProps> = ({ editProduct, saveProduct }) =
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    // console.log(e.isDefaultPrevented())
-    // e.preventDefault();
-    console.log('Form submitted without reloading the page')
+    e.preventDefault();
     saveProduct(form);
     resetForm();
   };
 
   const resetForm = (): void => {
-    setForm({ id: '', sku: '', name: '', price: 0, editing: false });
+    setForm({ id: '', sku: '', name: '', price: 0,});
+    setCanEdit(false);
   };
 
   return (
     <div className="product-form-container">
-      <h2>{form.editing ? 'Edit Product' : 'Add Product'}</h2>
+      <h2>{canEdit ? 'Edit Product' : 'Add Product'}</h2>
       <form onSubmit={handleSubmit}>
         <input
           name="sku"
@@ -76,7 +71,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ editProduct, saveProduct }) =
           className="input-field"
         />
         <button type="submit" className="submit-button">
-          {form.editing ? 'Update' : 'Add'}
+          {canEdit ? 'Update' : 'Add'}
         </button>
       </form>
     </div>
