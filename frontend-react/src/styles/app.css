@@ -1,0 +1,229 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.product-cart-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.product-list-container {
+  width: 48%;
+}
+
+.cart-table-container {
+  width: 48%;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.product-list-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .product-list-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .product-list-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .product-list-table th,
+  .product-list-table td {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .product-list-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .button {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    border-radius: 4px;
+  }
+  
+  .edit-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .add-to-cart-button {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #943002;
+    color: white;
+  }
+
+  .cart-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .cart-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .cart-table th,
+  .cart-table td {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .cart-item {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .cart-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .button {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    border-radius: 4px;
+  }
+  
+  .update-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .decrement-button {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .remove-button {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  button:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+  }
+  .product-form-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+  }
+  
+  .product-form-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+
+  .product-list-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .product-list-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .product-list-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .product-list-table th,
+  .product-list-table td {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .product-list-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .button {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    border-radius: 4px;
+  }
+  
+  .edit-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .add-to-cart-button {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #943002;
+    color: white;
+  }

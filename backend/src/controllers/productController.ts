@@ -16,6 +16,7 @@ export const addProduct = async (req: Request, res: Response) => {
   const products: Product[] = await readJSON(PRODUCT_FILE);
   let product = products.find((p: Product) => p.id === id);
   if (product) {
+    product.sku = sku;
     product.name = name;
     product.price = price;
   } else {

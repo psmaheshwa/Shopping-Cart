@@ -14,11 +14,11 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./frontend-react
     ports:
       - "4000:3000"
     volumes:
-      - ./frontend:/app
+      - ./frontend-react:/app
     environment:
       - ROLLUP_NO_NATIVE=true
     command: "npm run dev"
